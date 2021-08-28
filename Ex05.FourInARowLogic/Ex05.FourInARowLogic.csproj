@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
-    <Compile Include="GameManagerLogic.cs" />
+    <Compile Include="FourInARow.cs" />
     <Compile Include="Player.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

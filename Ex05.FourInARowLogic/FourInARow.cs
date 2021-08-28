@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Ex05.FourInARowLogic
 {
-    class GameManagerLogic
+    public class FourInARow
     {
         
             private readonly Player r_Player1;
@@ -16,7 +16,7 @@ namespace Ex05.FourInARowLogic
             private bool m_IsGameOver;
             private bool m_IsContinueToAnotherRound;
 
-            public GameManagerLogic(int i_BoardWidth, int i_BoardLength, int i_PlayerType)
+            public FourInARow(int i_BoardWidth, int i_BoardLength, int i_PlayerType)
             {
                 r_TheGameBoard = new Board(i_BoardWidth, i_BoardLength);
                 r_Player1 = new Player(2, 1);
