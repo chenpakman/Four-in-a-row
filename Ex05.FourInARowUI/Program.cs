@@ -14,6 +14,8 @@ namespace Ex05.FourInARowUI
             Application.EnableVisualStyles();
             FormGameSettings fourInARowSettings = new FormGameSettings();
             fourInARowSettings.ShowDialog();
+            FourInARowGameForm fourInARowGame = new FourInARowGameForm(fourInARowSettings);
+            fourInARowGame.ShowDialog();
         }
     }
 }

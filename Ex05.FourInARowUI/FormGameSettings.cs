@@ -88,6 +88,7 @@ namespace Ex05.FourInARowUI
             this.Controls.Add(r_NumericUpDownCols);
 
             r_StartButton.Text = "Start!";
+            r_StartButton.Click += startButton_click;
             r_StartButton.Size= new System.Drawing.Size(200, 20);
             r_StartButton.Location = new Point(r_PlayersLable.Left, r_RowsLable.Top + 40);
             this.Controls.Add(r_StartButton);
@@ -95,13 +96,16 @@ namespace Ex05.FourInARowUI
             this.Text = "Game Settings";
             this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
             this.ClientSize = new Size(r_StartButton.Right + 10, r_StartButton.Top + 40);
-            //this.Click=+
             this.StartPosition = FormStartPosition.CenterScreen;
 
 
 
         }
 
+        private void startButton_click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         public string Player1Name
         {
             get
