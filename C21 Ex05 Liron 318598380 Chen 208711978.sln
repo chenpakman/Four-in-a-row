@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex05.FourInARowLogic", "Ex05.FourInARowLogic\Ex05.FourInARowLogic.csproj", "{44187D01-2E56-4A6A-A5F2-F40143CEA6A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex05.FourInARowUI", "Ex05.FourInARowUI\Ex05.FourInARowUI.csproj", "{F22D35DF-102B-4D5E-8B97-D24691D08596}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44187D01-2E56-4A6A-A5F2-F40143CEA6A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44187D01-2E56-4A6A-A5F2-F40143CEA6A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44187D01-2E56-4A6A-A5F2-F40143CEA6A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44187D01-2E56-4A6A-A5F2-F40143CEA6A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F22D35DF-102B-4D5E-8B97-D24691D08596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22D35DF-102B-4D5E-8B97-D24691D08596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F22D35DF-102B-4D5E-8B97-D24691D08596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22D35DF-102B-4D5E-8B97-D24691D08596}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C2895D1-46E3-4F89-9701-F50812DBACA1}
+	EndGlobalSection
+EndGlobal
