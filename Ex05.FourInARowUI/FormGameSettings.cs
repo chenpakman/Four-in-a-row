@@ -146,7 +146,18 @@ namespace Ex05.FourInARowUI
             }
         }
 
+        public int Player2Type()
+        {
+            
+            int playerType=2;
+            if(!r_Player2CheckBox.Checked)
+            {
+                playerType = 1;
+            }
 
+            return playerType;
+
+        }
 
         private void Player2CheckBox_CheckedChanged(object sender, EventArgs e)
         {

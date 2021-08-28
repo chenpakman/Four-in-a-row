@@ -15,7 +15,7 @@ namespace Ex05.FourInARowLogic
             }
 
             private ePlayerType m_PlayerType;
-            private int m_ScoreOfPlayer;
+            private int m_ScoreOfPlayer=0;
             private char m_LetterType;
             private int m_NumberOfPlayer;
 
