@@ -166,30 +166,37 @@ namespace Ex05.FourInARowUI
         }
         private void button_Click(object i_Sender, EventArgs i_E)
         {
-            int o_CurrentChipRow = 0;
+            int o_CurrentChipRowCommputer = 0;
+            int o_CurrentChipRowPerson = 0;
+
             bool isFullColumnForComputerMove = true;
             bool isFullColumnForHumanMove = false;
            
-            if (!isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text)))
+            if (!isGameOver(o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text)))
             {
-                r_Game.UpdateBoardAndMoveToNextTurn(int.Parse((i_Sender as Button).Text), ref o_CurrentChipRow, ref isFullColumnForHumanMove);
-                m_TheGameBoardButtons[o_CurrentChipRow, int.Parse((i_Sender as Button).Text) - 1].Text =
+                r_Game.UpdateBoardAndMoveToNextTurn(int.Parse((i_Sender as Button).Text), ref o_CurrentChipRowPerson, ref isFullColumnForHumanMove);
+                m_TheGameBoardButtons[o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text) - 1].Text =
                r_Game.GetCurrentPlayer().PlayerLetterType.ToString();
-                if (r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Computer && !isFullColumnForHumanMove && !isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text)))
+                m_TheGameBoardButtons[o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text) - 1].Enabled = true;
+                m_TheGameBoardButtons[o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text) - 1].Enabled = false;
+
+                if (r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Computer && !isFullColumnForHumanMove && !isGameOver(o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text)))
                 {
                     while(isFullColumnForComputerMove)
                     {
                         r_Game.UpdateBoardAndMoveToNextTurn(
                             r_Game.GetComputerChoice(),
-                            ref o_CurrentChipRow,
+                            ref o_CurrentChipRowCommputer,
                             ref isFullColumnForComputerMove);
                     }
                     Thread.Sleep(500);
-                    m_TheGameBoardButtons[o_CurrentChipRow, r_Game.GetComputerChoice()-1].Text =
-                        r_Game.GetPlayer2.PlayerLetterType.ToString();
+                    m_TheGameBoardButtons[o_CurrentChipRowCommputer, r_Game.GetComputerChoice()-1].Text =r_Game.GetPlayer2.PlayerLetterType.ToString();
+                    m_TheGameBoardButtons[o_CurrentChipRowCommputer, r_Game.GetComputerChoice()-1].Enabled = true;
+                    m_TheGameBoardButtons[o_CurrentChipRowCommputer, r_Game.GetComputerChoice()-1].Enabled = false;
+
                 }
-                
-                //isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text));
+
+                isGameOver(o_CurrentChipRowCommputer, 'O');
                 if (r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Person)
                 { r_Game.m_GameRound++; }
             }
