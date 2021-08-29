@@ -150,7 +150,7 @@ namespace Ex05.FourInARowLogic
         {
             int computerChoice = new Random().Next(1, r_TheGameBoard.BoardWidth);
 
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
 
             return computerChoice;
         }

@@ -32,6 +32,7 @@ namespace Ex05.FourInARowUI
             int width = r_GameSettings.BoardCols;
             int length = r_GameSettings.BoardRows;
             int topButtenForEachRow = 40;
+           
             m_TheGameBoardButtons = new Button[length, width];
             for(int buttonIndex = 0; buttonIndex < width; buttonIndex++)
             {
@@ -176,7 +177,6 @@ namespace Ex05.FourInARowUI
                r_Game.GetCurrentPlayer().PlayerLetterType.ToString();
                 if (r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Computer && !isFullColumnForHumanMove && !isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text)))
                 {
-                    
                     while(isFullColumnForComputerMove)
                     {
                         r_Game.UpdateBoardAndMoveToNextTurn(
@@ -184,8 +184,8 @@ namespace Ex05.FourInARowUI
                             ref o_CurrentChipRow,
                             ref isFullColumnForComputerMove);
                     }
-                    Thread.Sleep(200);
-                    m_TheGameBoardButtons[ o_CurrentChipRow, r_Game.GetComputerChoice()].Text =
+                    Thread.Sleep(500);
+                    m_TheGameBoardButtons[o_CurrentChipRow, r_Game.GetComputerChoice()-1].Text =
                         r_Game.GetPlayer2.PlayerLetterType.ToString();
                 }
                 

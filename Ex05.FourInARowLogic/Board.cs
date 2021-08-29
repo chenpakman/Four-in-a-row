@@ -13,7 +13,7 @@ namespace Ex05.FourInARowLogic
             private int m_BoardWidth;
             private readonly int r_SequenceOfFour = 4;
 
-            public Board(int i_BoardLength, int i_BoardWidth)
+            public Board(int i_BoardWidth,int i_BoardLength)
             {
                 m_BoardLength = i_BoardLength;
                 m_BoardWidth = i_BoardWidth;
