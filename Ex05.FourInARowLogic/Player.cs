@@ -13,21 +13,30 @@ namespace Ex05.FourInARowLogic
                 Computer = 1,
                 Person = 2
             }
+        public enum ePlayerChip
+        {
+            X,
+            O
+            
+        }
+
 
             private ePlayerType m_PlayerType;
             private int m_ScoreOfPlayer=0;
-            private char m_LetterType;
-            private int m_NumberOfPlayer;
+            private ePlayerChip m_LetterType;
+            bool m_IsPlayerWon;
+            int m_NumOfPlayer;
 
-            public Player(int i_PlayerType, int i_NumberOfPlayer)
+            public Player(int i_PlayerType, char i_ChipOfPlayer)
             {
                 m_PlayerType = (ePlayerType)i_PlayerType;
                 m_ScoreOfPlayer = 0;
-                m_LetterType = i_NumberOfPlayer == 1 ? 'X' : 'O';
-                m_NumberOfPlayer = i_NumberOfPlayer;
+                m_LetterType = (ePlayerChip)i_ChipOfPlayer;
+            m_IsPlayerWon = false;
+                m_NumOfPlayer = i_ChipOfPlayer == 'X'? 1 : 2;
             }
 
-            public char PlayerLetterType
+            public ePlayerChip PlayerLetterType
             {
                 get
                 {
@@ -40,20 +49,33 @@ namespace Ex05.FourInARowLogic
                 }
             }
 
-            public int NumberOfPlayer
+        public bool IsPlayerWon
+        {
+            get
             {
-                get
-                {
-                    return m_NumberOfPlayer;
-                }
-
-                set
-                {
-                    m_NumberOfPlayer = value;
-                }
+                return m_IsPlayerWon;
             }
 
-            public int PlayerScore
+            set
+            {
+                m_IsPlayerWon = value;
+            }
+        }
+
+        public int NumberOfPlayer
+        {
+            get
+            {
+                return m_NumOfPlayer;
+            }
+
+            set
+            {
+                m_NumOfPlayer = value;
+            }
+        }
+
+        public int PlayerScore
             {
                 get
                 {

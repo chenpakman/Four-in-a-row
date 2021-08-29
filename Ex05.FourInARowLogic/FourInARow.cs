@@ -18,8 +18,8 @@ namespace Ex05.FourInARowLogic
         public FourInARow(int i_BoardWidth, int i_BoardLength, int i_PlayerType)
         {
             r_TheGameBoard = new Board(i_BoardWidth, i_BoardLength);
-            r_Player1 = new Player(2, 1);
-            r_Player2 = new Player(i_PlayerType, 2);
+            r_Player1 = new Player(2, 'X');
+            r_Player2 = new Player(i_PlayerType, 'O');
             m_GameRoundCounter = 0;
             m_IsGameOver = false;
         }
@@ -107,29 +107,30 @@ namespace Ex05.FourInARowLogic
             }
         }
 
-        public bool IsPlayerWon(int i_CurrentChipRow, int i_PlayerColumnChoice)
+        public void IsPlayerWon(int i_CurrentChipRow, int i_PlayerColumnChoice)
         {
-            bool isPlayerWon = isPlayerWon =
+            bool isPlayerWon = 
                                    r_TheGameBoard.IsFourInARow(
-                                       GetCurrentPlayer().PlayerLetterType,
+                                       (char)GetCurrentPlayer().PlayerLetterType,
                                        i_CurrentChipRow,
                                        i_PlayerColumnChoice - 1)
-                                   || r_TheGameBoard.IsFourInADiagonal(GetCurrentPlayer().PlayerLetterType)
+                                   || r_TheGameBoard.IsFourInADiagonal((char)GetCurrentPlayer().PlayerLetterType)
                                    || r_TheGameBoard.IsFourInACol(
-                                       GetCurrentPlayer().PlayerLetterType,
+                                       (char)GetCurrentPlayer().PlayerLetterType,
                                        i_CurrentChipRow,
                                        i_PlayerColumnChoice - 1); ;
 
-            return isPlayerWon;
+            GetCurrentPlayer().IsPlayerWon = isPlayerWon;
         }
 
-        public void UpdateBoardAndMoveToNextTurn(int i_ColumnChipToAdd, ref int o_CurrentChipRow, ref bool io_IsFullColumnNumber)
+        public void UpdateBoardAndMoveToNextTurn(int i_ColumnChipToAdd, ref int o_CurrentChipRow, ref bool io_IsFullColumnNumber,char i_PlayerLetterType)
         {
-
+           
             io_IsFullColumnNumber = TheGameBoard.AddChips(
                 i_ColumnChipToAdd,
-                GetCurrentPlayer().PlayerLetterType,
+                i_PlayerLetterType,
                 ref o_CurrentChipRow);
+            
             /*if(r_Player2.PlayerType == Player.ePlayerType.Computer&&!io_IsFullColumnForHumanMove)
             {
                 while(!io_IsFullColumnForComputerMove)

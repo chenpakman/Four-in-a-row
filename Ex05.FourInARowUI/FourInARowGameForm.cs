@@ -97,13 +97,13 @@ namespace Ex05.FourInARowUI
         {
             //bool gameOver = r_Game.IsGameOver();
             bool gameTie = r_Game.TheGameBoard.IsFullBoard();
-            bool gameWon = r_Game.IsPlayerWon(i_CurrentChipRow,i_PlayerColumnChoice);
+             r_Game.IsPlayerWon(i_CurrentChipRow,i_PlayerColumnChoice);
 
                 if (gameTie)
                 {
                     announceTieAndCheckIfContinue();
                 }
-                else if (gameWon)
+                else if (r_Game.GetCurrentPlayer().IsPlayerWon)
                 {
                     //r_Game.GetCurrentPlayer().PlayerScore++;
                     announceWinAndCheckIfContinue();
@@ -111,7 +111,7 @@ namespace Ex05.FourInARowUI
                 }
             
 
-            return gameTie|| gameWon;
+            return gameTie|| r_Game.GetCurrentPlayer().IsPlayerWon;
         }
 
         private void announceWinAndCheckIfContinue()
@@ -168,38 +168,42 @@ namespace Ex05.FourInARowUI
         {
             int o_CurrentChipRowCommputer = 0;
             int o_CurrentChipRowPerson = 0;
-
+            int computerChoice = 0;
             bool isFullColumnForComputerMove = true;
             bool isFullColumnForHumanMove = false;
            
-            if (!isGameOver(o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text)))
-            {
-                r_Game.UpdateBoardAndMoveToNextTurn(int.Parse((i_Sender as Button).Text), ref o_CurrentChipRowPerson, ref isFullColumnForHumanMove);
+            
+                r_Game.UpdateBoardAndMoveToNextTurn(int.Parse((i_Sender as Button).Text), ref o_CurrentChipRowPerson, ref isFullColumnForHumanMove,(char)r_Game.GetCurrentPlayer().PlayerLetterType);
                 m_TheGameBoardButtons[o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text) - 1].Text =
-               r_Game.GetCurrentPlayer().PlayerLetterType.ToString();
+              ((char)r_Game.GetCurrentPlayer().PlayerLetterType).ToString();
                 m_TheGameBoardButtons[o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text) - 1].Enabled = true;
                 m_TheGameBoardButtons[o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text) - 1].Enabled = false;
-
-                if (r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Computer && !isFullColumnForHumanMove && !isGameOver(o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text)))
+            //isGameOver(o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text));
+              
+            if (!isGameOver(o_CurrentChipRowPerson, int.Parse((i_Sender as Button).Text))&&r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Computer && !isFullColumnForHumanMove )
                 {
-                    while(isFullColumnForComputerMove)
+                r_Game.m_GameRound++;
+                while (isFullColumnForComputerMove)
                     {
+                        computerChoice = r_Game.GetComputerChoice();
                         r_Game.UpdateBoardAndMoveToNextTurn(
-                            r_Game.GetComputerChoice(),
+                            computerChoice,
                             ref o_CurrentChipRowCommputer,
-                            ref isFullColumnForComputerMove);
+                            ref isFullColumnForComputerMove, (char)r_Game.GetCurrentPlayer().PlayerLetterType);
                     }
                     Thread.Sleep(500);
-                    m_TheGameBoardButtons[o_CurrentChipRowCommputer, r_Game.GetComputerChoice()-1].Text =r_Game.GetPlayer2.PlayerLetterType.ToString();
-                    m_TheGameBoardButtons[o_CurrentChipRowCommputer, r_Game.GetComputerChoice()-1].Enabled = true;
-                    m_TheGameBoardButtons[o_CurrentChipRowCommputer, r_Game.GetComputerChoice()-1].Enabled = false;
-
-                }
-
-                isGameOver(o_CurrentChipRowCommputer, 'O');
-                if (r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Person)
-                { r_Game.m_GameRound++; }
+                    m_TheGameBoardButtons[o_CurrentChipRowCommputer, computerChoice - 1].Text = ((char)r_Game.GetPlayer2.PlayerLetterType).ToString();
+                    m_TheGameBoardButtons[o_CurrentChipRowCommputer, computerChoice - 1].Enabled = true;
+                    m_TheGameBoardButtons[o_CurrentChipRowCommputer, computerChoice - 1].Enabled = false;
+                
+                isGameOver(o_CurrentChipRowCommputer, computerChoice);
+               
             }
+
+
+            r_Game.m_GameRound++;
+
+
 
         }
     }
