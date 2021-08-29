@@ -32,7 +32,7 @@ namespace Ex05.FourInARowUI
             int width = r_GameSettings.BoardCols;
             int length = r_GameSettings.BoardRows;
             int topButtenForEachRow = 40;
-            m_TheGameBoardButtons = new Button[width, length];
+            m_TheGameBoardButtons = new Button[length, width];
             for(int buttonIndex = 0; buttonIndex < width; buttonIndex++)
             {
                 Button button = new Button();
@@ -51,11 +51,11 @@ namespace Ex05.FourInARowUI
 
                 for(int c = 0; c < r_GameSettings.BoardCols; c++)
                 {
-                    m_TheGameBoardButtons[c, r] = new Button();
-                    m_TheGameBoardButtons[c, r].Size = new Size(30, 30);
-                    m_TheGameBoardButtons[c, r].Location = new Point((c + 1) * 35, topButtenForEachRow);
-                    m_TheGameBoardButtons[c, r].Enabled = false;
-                    this.Controls.Add(m_TheGameBoardButtons[c, r]);
+                    m_TheGameBoardButtons[r,c] = new Button();
+                    m_TheGameBoardButtons[r, c].Size = new Size(30, 30);
+                    m_TheGameBoardButtons[r, c].Location = new Point((c + 1) * 35, topButtenForEachRow);
+                    m_TheGameBoardButtons[r, c].Enabled = false;
+                    this.Controls.Add(m_TheGameBoardButtons[r, c]);
                 }
 
                 topButtenForEachRow = topButtenForEachRow + 40;
@@ -66,20 +66,20 @@ namespace Ex05.FourInARowUI
             r_player1Label.Text = r_GameSettings.Player1Name + ":" + r_Game.GetPlayer1.PlayerScore;
             r_player1Label.AutoSize = true;
             r_player1Label.Location = new Point(
-                m_TheGameBoardButtons[(width - 1) / 2, (length - 1) / 2].Left / 2,
-                10 + m_TheGameBoardButtons[width - 1, length - 1].Bottom);
+                m_TheGameBoardButtons[(length - 1) / 2,(width - 1) / 2].Left / 2,
+                10 + m_TheGameBoardButtons[ length - 1, width - 1].Bottom);
             this.Controls.Add(r_player1Label);
 
             r_player2Label.Text = r_GameSettings.Player2Name + ":" + r_Game.GetPlayer2.PlayerScore;
             r_player2Label.AutoSize = true;
             r_player2Label.Location = new Point(
                 r_player1Label.Left + 30,
-                10 + m_TheGameBoardButtons[width - 1, length - 1].Bottom);
+                10 + m_TheGameBoardButtons[ length - 1, width - 1].Bottom);
             this.Controls.Add(r_player2Label);
 
             this.ClientSize = new Size(
-                m_TheGameBoardButtons[width - 1, length - 1].Right + r_ChipLocaitionButtons[0].Left,
-                m_TheGameBoardButtons[width - 1, length - 1].Bottom + r_ChipLocaitionButtons[0].Left);
+                m_TheGameBoardButtons[length - 1, width - 1].Right + r_ChipLocaitionButtons[0].Left,
+                m_TheGameBoardButtons[length - 1, width - 1].Bottom + r_ChipLocaitionButtons[0].Left);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
             this.Text = "4 in a Row !!";
@@ -172,7 +172,7 @@ namespace Ex05.FourInARowUI
             if (!isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text)))
             {
                 r_Game.UpdateBoardAndMoveToNextTurn(int.Parse((i_Sender as Button).Text), ref o_CurrentChipRow, ref isFullColumnForHumanMove);
-                m_TheGameBoardButtons[int.Parse((i_Sender as Button).Text) - 1, o_CurrentChipRow].Text =
+                m_TheGameBoardButtons[o_CurrentChipRow, int.Parse((i_Sender as Button).Text) - 1].Text =
                r_Game.GetCurrentPlayer().PlayerLetterType.ToString();
                 if (r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Computer && !isFullColumnForHumanMove && !isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text)))
                 {
@@ -184,8 +184,8 @@ namespace Ex05.FourInARowUI
                             ref o_CurrentChipRow,
                             ref isFullColumnForComputerMove);
                     }
-                    Thread.Sleep(500);
-                    m_TheGameBoardButtons[r_Game.GetComputerChoice()-1, o_CurrentChipRow].Text =
+                    Thread.Sleep(200);
+                    m_TheGameBoardButtons[ o_CurrentChipRow, r_Game.GetComputerChoice()].Text =
                         r_Game.GetPlayer2.PlayerLetterType.ToString();
                 }
                 
