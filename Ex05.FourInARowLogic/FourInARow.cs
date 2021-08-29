@@ -123,15 +123,28 @@ namespace Ex05.FourInARowLogic
             return isPlayerWon;
         }
 
-        public bool updateBoardAndMoveToNextTurn(int i_ColumnChipToAdd, ref int o_CurrentChipRow)
+        public void UpdateBoardAndMoveToNextTurn(int i_ColumnChipToAdd, ref int o_CurrentChipRow, ref bool io_IsFullColumnNumber)
         {
-            
-            bool isFullColumnNumber = TheGameBoard.AddChips(
+
+            io_IsFullColumnNumber = TheGameBoard.AddChips(
                 i_ColumnChipToAdd,
                 GetCurrentPlayer().PlayerLetterType,
                 ref o_CurrentChipRow);
-           // m_GameRoundCounter++;
-            return isFullColumnNumber;
+            /*if(r_Player2.PlayerType == Player.ePlayerType.Computer&&!io_IsFullColumnForHumanMove)
+            {
+                while(!io_IsFullColumnForComputerMove)
+                {
+                    io_IsFullColumnForComputerMove = TheGameBoard.AddChips(
+                     GetComputerChoice(),
+                     r_Player2.PlayerLetterType,
+                    ref o_CurrentChipRow);
+
+                }
+           
+
+            }*/
+            
+
         }
         public int GetComputerChoice()
         {

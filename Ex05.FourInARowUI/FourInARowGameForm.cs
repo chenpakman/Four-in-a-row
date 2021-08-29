@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using Ex05.FourInARowLogic;
+using System.Threading;
 
 namespace Ex05.FourInARowUI
 {
@@ -165,14 +166,32 @@ namespace Ex05.FourInARowUI
         private void button_Click(object i_Sender, EventArgs i_E)
         {
             int o_CurrentChipRow = 0;
-            
-            if(!isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text)))
+            bool isFullColumnForComputerMove = true;
+            bool isFullColumnForHumanMove = false;
+           
+            if (!isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text)))
             {
-                r_Game.updateBoardAndMoveToNextTurn(int.Parse((i_Sender as Button).Text), ref o_CurrentChipRow);
+                r_Game.UpdateBoardAndMoveToNextTurn(int.Parse((i_Sender as Button).Text), ref o_CurrentChipRow, ref isFullColumnForHumanMove);
                 m_TheGameBoardButtons[int.Parse((i_Sender as Button).Text) - 1, o_CurrentChipRow].Text =
-                    r_Game.GetCurrentPlayer().PlayerLetterType.ToString();
-                isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text));
-                r_Game.m_GameRound++;
+               r_Game.GetCurrentPlayer().PlayerLetterType.ToString();
+                if (r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Computer && !isFullColumnForHumanMove && !isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text)))
+                {
+                    
+                    while(isFullColumnForComputerMove)
+                    {
+                        r_Game.UpdateBoardAndMoveToNextTurn(
+                            r_Game.GetComputerChoice(),
+                            ref o_CurrentChipRow,
+                            ref isFullColumnForComputerMove);
+                    }
+                    Thread.Sleep(500);
+                    m_TheGameBoardButtons[r_Game.GetComputerChoice()-1, o_CurrentChipRow].Text =
+                        r_Game.GetPlayer2.PlayerLetterType.ToString();
+                }
+                
+                //isGameOver(o_CurrentChipRow, int.Parse((i_Sender as Button).Text));
+                if (r_Game.GetPlayer2.PlayerType == Player.ePlayerType.Person)
+                { r_Game.m_GameRound++; }
             }
 
         }
