@@ -80,6 +80,10 @@ namespace Ex05.FourInARowLogic
             m_GameRoundCounter = 0;
             r_TheGameBoard.InitBoard(r_TheGameBoard.BoardLength, r_TheGameBoard.BoardWidth);
             //Console.Clear();
+            r_Player1.IsPlayerWon = false;
+            r_Player2.IsPlayerWon = false;
+
+
         }
 
         public Player GetCurrentPlayer()
@@ -130,20 +134,6 @@ namespace Ex05.FourInARowLogic
                 i_ColumnChipToAdd,
                 i_PlayerLetterType,
                 ref o_CurrentChipRow);
-            
-            /*if(r_Player2.PlayerType == Player.ePlayerType.Computer&&!io_IsFullColumnForHumanMove)
-            {
-                while(!io_IsFullColumnForComputerMove)
-                {
-                    io_IsFullColumnForComputerMove = TheGameBoard.AddChips(
-                     GetComputerChoice(),
-                     r_Player2.PlayerLetterType,
-                    ref o_CurrentChipRow);
-
-                }
-           
-
-            }*/
             
 
         }

@@ -32,7 +32,7 @@ namespace Ex05.FourInARowLogic
                 m_PlayerType = (ePlayerType)i_PlayerType;
                 m_ScoreOfPlayer = 0;
                 m_LetterType = (ePlayerChip)i_ChipOfPlayer;
-            m_IsPlayerWon = false;
+                 m_IsPlayerWon = false;
                 m_NumOfPlayer = i_ChipOfPlayer == 'X'? 1 : 2;
             }
 
