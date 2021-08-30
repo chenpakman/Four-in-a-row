@@ -35,25 +35,47 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FormGameSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FourInARowGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FourInARowGameForm.Designer.cs">
+      <DependentUpon>FourInARowGameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGameSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGameSettings.Designer.cs">
+      <DependentUpon>FormGameSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameManagerUI.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ex05.FourInARowLogic\Ex05.FourInARowLogic.csproj">
       <Project>{44187d01-2e56-4a6a-a5f2-f40143cea6a1}</Project>
       <Name>Ex05.FourInARowLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormGameSettings.resx">
+      <DependentUpon>FormGameSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

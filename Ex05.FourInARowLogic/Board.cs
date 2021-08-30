@@ -68,7 +68,7 @@ namespace Ex05.FourInARowLogic
 
             public bool AddChips(int i_ColumnChipToAdd, char i_PlayerChip, ref int o_CurrentChipRow)
             {
-                bool isFullColumnNumber = isFullColumn(i_ColumnChipToAdd - 1);
+                bool isFullColumnNumber = IsFullColumn(i_ColumnChipToAdd - 1);
 
                 if (!isFullColumnNumber)
                 {
@@ -93,7 +93,7 @@ namespace Ex05.FourInARowLogic
                 return isEmptyPanel;
             }
 
-            private bool isFullColumn(int i_ColumnChipToAdd)
+            public bool IsFullColumn(int i_ColumnChipToAdd)
             {
                 bool isFullColumn = !(isEmptyPanel(0, i_ColumnChipToAdd));
 

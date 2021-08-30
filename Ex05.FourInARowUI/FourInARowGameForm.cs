@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace Ex05.FourInARowUI
 {
-    class FourInARowGameForm : Form
+    partial class FourInARowGameForm : Form
     {
         private Button[,] m_TheGameBoardButtons;
         private readonly List<Button> r_ChipLocaitionButtons = new List<Button>();
@@ -19,22 +19,29 @@ namespace Ex05.FourInARowUI
         private readonly FourInARow r_Game;
 
 
-        public FourInARowGameForm(FormGameSettings i_GameSettings)
+        public FourInARowGameForm()
         {
-            r_GameSettings = i_GameSettings;
+            r_GameSettings = new FormGameSettings();
+            if (r_GameSettings.ShowDialog() == DialogResult.OK)
+            {
             r_Game = new FourInARow(r_GameSettings.BoardCols, r_GameSettings.BoardRows, r_GameSettings.Player2Type());
-            InitBoardGame();
+
+                InitBoardGame();
+                
+                ShowDialog();
+            }
 
         }
+
 
         public void InitBoardGame()
         {
             int width = r_GameSettings.BoardCols;
             int length = r_GameSettings.BoardRows;
             int topButtenForEachRow = 40;
-           
+
             m_TheGameBoardButtons = new Button[length, width];
-            for(int buttonIndex = 0; buttonIndex < width; buttonIndex++)
+            for (int buttonIndex = 0; buttonIndex < width; buttonIndex++)
             {
                 Button button = new Button();
                 button.Text = (buttonIndex + 1).ToString();
@@ -46,13 +53,13 @@ namespace Ex05.FourInARowUI
 
             }
 
-            for(int r = 0; r < r_GameSettings.BoardRows; r++)
+            for (int r = 0; r < r_GameSettings.BoardRows; r++)
             {
 
 
-                for(int c = 0; c < r_GameSettings.BoardCols; c++)
+                for (int c = 0; c < r_GameSettings.BoardCols; c++)
                 {
-                    m_TheGameBoardButtons[r,c] = new Button();
+                    m_TheGameBoardButtons[r, c] = new Button();
                     m_TheGameBoardButtons[r, c].Size = new Size(30, 30);
                     m_TheGameBoardButtons[r, c].Location = new Point((c + 1) * 35, topButtenForEachRow);
                     m_TheGameBoardButtons[r, c].Enabled = false;
@@ -63,19 +70,18 @@ namespace Ex05.FourInARowUI
 
             }
 
-            // this.r_player1Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
             r_player1Label.Text = r_GameSettings.Player1Name + ":" + r_Game.GetPlayer1.PlayerScore;
             r_player1Label.AutoSize = true;
             r_player1Label.Location = new Point(
-                m_TheGameBoardButtons[(length - 1) / 2,(width - 1) / 2].Left / 2,
-                10 + m_TheGameBoardButtons[ length - 1, width - 1].Bottom);
+                m_TheGameBoardButtons[(length - 1) / 2, (width - 1) / 2].Left / 2,
+                10 + m_TheGameBoardButtons[length - 1, width - 1].Bottom);
             this.Controls.Add(r_player1Label);
 
             r_player2Label.Text = r_GameSettings.Player2Name + ":" + r_Game.GetPlayer2.PlayerScore;
             r_player2Label.AutoSize = true;
             r_player2Label.Location = new Point(
                 r_player1Label.Left + 30,
-                10 + m_TheGameBoardButtons[ length - 1, width - 1].Bottom);
+                10 + m_TheGameBoardButtons[length - 1, width - 1].Bottom);
             this.Controls.Add(r_player2Label);
 
             this.ClientSize = new Size(
@@ -89,28 +95,28 @@ namespace Ex05.FourInARowUI
         }
         private void updatePlayerScoreLabel()
         {
-            r_player1Label.Text = r_GameSettings.Player1Name+":"+r_Game.GetCurrentPlayer().PlayerScore.ToString();
-            r_player2Label.Text = r_GameSettings.Player2Name + ":"+r_Game.GetPreviousPlayer().PlayerScore.ToString();
+            r_player1Label.Text = r_GameSettings.Player1Name + ":" + r_Game.GetCurrentPlayer().PlayerScore.ToString();
+            r_player2Label.Text = r_GameSettings.Player2Name + ":" + r_Game.GetPreviousPlayer().PlayerScore.ToString();
         }
 
         private bool isGameOver(int i_CurrentChipRow, int i_PlayerColumnChoice)
         {
             bool gameTie = r_Game.TheGameBoard.IsFullBoard();
-             r_Game.IsPlayerWon(i_CurrentChipRow,i_PlayerColumnChoice);
+            r_Game.IsPlayerWon(i_CurrentChipRow, i_PlayerColumnChoice);
             bool gameWon = r_Game.GetCurrentPlayer().IsPlayerWon;
-                if (gameTie)
-                {
-                    announceTieAndCheckIfContinue();
-                }
-                else if (gameWon)
-                {
-                    
-                    announceWinAndCheckIfContinue();
-                    
-                }
-            
+            if (gameTie)
+            {
+                announceTieAndCheckIfContinue();
+            }
+            else if (gameWon)
+            {
 
-            return gameTie|| gameWon;
+                announceWinAndCheckIfContinue();
+
+            }
+
+
+            return gameTie || gameWon;
         }
 
         private void announceWinAndCheckIfContinue()
@@ -134,10 +140,11 @@ namespace Ex05.FourInARowUI
         {
             if (i_DialogResult == DialogResult.Yes)
             {
+                enableButtons();
                 updatePlayerScoreLabel();
                 clearTheGameBoardButtons();
                 r_Game.InitGame();
-                
+
             }
             else if (i_DialogResult == DialogResult.No)
             {
@@ -155,7 +162,7 @@ namespace Ex05.FourInARowUI
         }
         private void quitGame()
         {
-            string messageToTheUser= string.Format(
+            string messageToTheUser = string.Format(
                 "Game Over{0}Player 1 Score:{1}{0}Player 2 Score{2}",
                 Environment.NewLine,
                 r_Game.GetPlayer1.PlayerScore,
@@ -167,12 +174,12 @@ namespace Ex05.FourInARowUI
         {
             int currentChipRowPerson = 0;
             bool isFullColumnForHumanMove = false;
-            Button selectedButton= i_Sender as Button;
+            Button selectedButton = i_Sender as Button;
             int TheButtonNumber = int.Parse(selectedButton.Text);
             bool doComputerMove;
 
-            humanMove(TheButtonNumber, ref isFullColumnForHumanMove,ref currentChipRowPerson);
-
+            humanMove(TheButtonNumber, ref isFullColumnForHumanMove, ref currentChipRowPerson);
+           
 
             if (!isGameOver(currentChipRowPerson, TheButtonNumber))
             {
@@ -180,7 +187,7 @@ namespace Ex05.FourInARowUI
                 if (doComputerMove)
                 {
                     computerMove();
-                    
+
 
                 }
                 else
@@ -190,12 +197,12 @@ namespace Ex05.FourInARowUI
                 }
 
             }
-           
+
 
 
 
         }
-       private void humanMove(int i_SelectedButtonNumber,ref bool isFullColumnForHumanMove,ref int currentChipRowPerson)
+        private void humanMove(int i_SelectedButtonNumber, ref bool isFullColumnForHumanMove, ref int currentChipRowPerson)
         {
 
             r_Game.UpdateBoardAndMoveToNextTurn(i_SelectedButtonNumber, ref currentChipRowPerson, ref isFullColumnForHumanMove, (char)r_Game.GetCurrentPlayer().PlayerLetterType);
@@ -203,14 +210,16 @@ namespace Ex05.FourInARowUI
           ((char)r_Game.GetCurrentPlayer().PlayerLetterType).ToString();
             m_TheGameBoardButtons[currentChipRowPerson, i_SelectedButtonNumber - 1].Enabled = true;
             m_TheGameBoardButtons[currentChipRowPerson, i_SelectedButtonNumber - 1].Enabled = false;
-
+            if (r_Game.TheGameBoard.IsFullColumn(i_SelectedButtonNumber - 1))
+            {
+                r_ChipLocaitionButtons[i_SelectedButtonNumber - 1].Enabled = false;
+            }
         }
         private void computerMove()
         {
             int computerChoice = 0;
             bool isFullColumnForComputerMove = true;
             int currentChipRowComputer = 0;
-            disableButtons();
             while (isFullColumnForComputerMove)
             {
                 computerChoice = r_Game.GetComputerChoice();
@@ -219,22 +228,22 @@ namespace Ex05.FourInARowUI
                     ref currentChipRowComputer,
                     ref isFullColumnForComputerMove, (char)r_Game.GetPreviousPlayer().PlayerLetterType);
             }
+            if (r_Game.TheGameBoard.IsFullColumn(computerChoice - 1))
+            {
+                r_ChipLocaitionButtons[computerChoice - 1].Enabled = false;
+            }
             Thread.Sleep(500);
             m_TheGameBoardButtons[currentChipRowComputer, computerChoice - 1].Text = ((char)r_Game.GetPreviousPlayer().PlayerLetterType).ToString();
             m_TheGameBoardButtons[currentChipRowComputer, computerChoice - 1].Enabled = true;
             m_TheGameBoardButtons[currentChipRowComputer, computerChoice - 1].Enabled = false;
-             r_Game.m_GameRound++;
-            isGameOver(currentChipRowComputer, computerChoice);
-            r_Game.m_GameRound--;
-            enableButtons();
-        }
-        private void disableButtons()
-        {
-            for (int buttonIndex = 0; buttonIndex < r_GameSettings.BoardCols; buttonIndex++)
+            r_Game.m_GameRound++;
+           if(!isGameOver(currentChipRowComputer, computerChoice))
             {
-                r_ChipLocaitionButtons[buttonIndex].Enabled = false;
+                r_Game.m_GameRound--;
             }
+            
         }
+        
         private void enableButtons()
         {
             for (int buttonIndex = 0; buttonIndex < r_GameSettings.BoardCols; buttonIndex++)
@@ -244,5 +253,5 @@ namespace Ex05.FourInARowUI
         }
     }
 
-   
+
 }
