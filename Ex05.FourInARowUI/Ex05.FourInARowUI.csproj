@@ -38,9 +38,6 @@
     <Compile Include="FourInARowGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FourInARowGameForm.Designer.cs">
-      <DependentUpon>FourInARowGameForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormGameSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +68,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormGameSettings.resx">
       <DependentUpon>FormGameSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FourInARowGameForm.resx">
+      <DependentUpon>FourInARowGameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

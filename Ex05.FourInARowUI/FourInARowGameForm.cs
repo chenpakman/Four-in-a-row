@@ -25,7 +25,7 @@ namespace Ex05.FourInARowUI
             if (r_GameSettings.ShowDialog() == DialogResult.OK)
             {
             r_Game = new FourInARow(r_GameSettings.BoardCols, r_GameSettings.BoardRows, r_GameSettings.Player2Type());
-
+                
                 InitBoardGame();
                 
                 ShowDialog();
@@ -70,6 +70,7 @@ namespace Ex05.FourInARowUI
 
             }
 
+           
             r_player1Label.Text = r_GameSettings.Player1Name + ":" + r_Game.GetPlayer1.PlayerScore;
             r_player1Label.AutoSize = true;
             r_player1Label.Location = new Point(
@@ -77,10 +78,11 @@ namespace Ex05.FourInARowUI
                 10 + m_TheGameBoardButtons[length - 1, width - 1].Bottom);
             this.Controls.Add(r_player1Label);
 
+           
             r_player2Label.Text = r_GameSettings.Player2Name + ":" + r_Game.GetPlayer2.PlayerScore;
             r_player2Label.AutoSize = true;
             r_player2Label.Location = new Point(
-                r_player1Label.Left + 30,
+                r_player1Label.Right+10,
                 10 + m_TheGameBoardButtons[length - 1, width - 1].Bottom);
             this.Controls.Add(r_player2Label);
 
@@ -251,6 +253,8 @@ namespace Ex05.FourInARowUI
                 r_ChipLocaitionButtons[buttonIndex].Enabled = true;
             }
         }
+
+       
     }
 
 

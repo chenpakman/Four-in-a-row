@@ -11,20 +11,24 @@ namespace Ex05.FourInARowUI
 {
     public partial class FormGameSettings : Form
     {
+        string m_Player1Name = string.Empty;
+        string m_Player2Name = "Computer";
+
         public FormGameSettings()
         {
             InitializeComponent();
+          
         }
 
         public string Player1Name
         {
             get
             {
-                return textBoxPlayer1.Text;
+                return m_Player1Name;
             }
             set
             {
-                textBoxPlayer1.Text = value;
+                m_Player1Name = value;
             }
         }
 
@@ -32,11 +36,11 @@ namespace Ex05.FourInARowUI
         {
             get
             {
-                return textBoxPlayer2.Text;
+                return m_Player2Name;
             }
             set
             {
-                textBoxPlayer2.Text = value;
+                m_Player2Name = value;
             }
         }
 
@@ -52,7 +56,7 @@ namespace Ex05.FourInARowUI
         {
             get
             {
-                return (int)NumericUpDownRows.Value;
+                return (int)numericUpDownRows.Value;
             }
         }
 
@@ -60,7 +64,7 @@ namespace Ex05.FourInARowUI
         {
 
             int playerType = 2;
-            if (!CheckBoxPlayer2.Checked)
+            if (!checkBoxPlayer2.Checked)
             {
                 playerType = 1;
             }
@@ -72,16 +76,19 @@ namespace Ex05.FourInARowUI
         private void buttonStart_Click(object sender, EventArgs e)
         {
             this.Close();
+            updatePlayer1Name();
+            updatePlayer2Name();
             this.DialogResult = DialogResult.OK;
         }
 
-        private void CheckBoxPlayer2_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxPlayer2_CheckedChanged(object sender, EventArgs e)
         {
             if (!textBoxPlayer2.Enabled)
             {
                 textBoxPlayer2.Enabled = true;
                 this.textBoxPlayer2.BackColor = Color.White;
                 this.textBoxPlayer2.Text = String.Empty;
+                
             }
             else
             {
@@ -90,7 +97,22 @@ namespace Ex05.FourInARowUI
                 this.textBoxPlayer2.Text = @"[Computer]";
             }
         }
+        private void updatePlayer1Name()
+        {
+            m_Player1Name = textBoxPlayer1.Text == string.Empty ? "Player 1" : textBoxPlayer1.Text;
+        }
 
-        
+        private void updatePlayer2Name()
+        {
+            if (!checkBoxPlayer2.Checked)
+            {
+                m_Player2Name = "Computer";
+            }
+            else {
+                m_Player2Name = textBoxPlayer2.Text == string.Empty ? "Player 2" : textBoxPlayer2.Text;
+            } 
+        }
+
+
     }
 }
