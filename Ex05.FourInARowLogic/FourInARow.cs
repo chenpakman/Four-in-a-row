@@ -79,7 +79,6 @@ namespace Ex05.FourInARowLogic
             m_IsContinueToAnotherRound = true;
             m_GameRoundCounter = 0;
             r_TheGameBoard.InitBoard(r_TheGameBoard.BoardLength, r_TheGameBoard.BoardWidth);
-            //Console.Clear();
             r_Player1.IsPlayerWon = false;
             r_Player2.IsPlayerWon = false;
 

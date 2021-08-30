@@ -21,10 +21,10 @@ namespace Ex05.FourInARowLogic
         }
 
 
-            private ePlayerType m_PlayerType;
-            private int m_ScoreOfPlayer=0;
-            private ePlayerChip m_LetterType;
-            bool m_IsPlayerWon;
+            private   ePlayerType m_PlayerType;
+            private  int m_ScoreOfPlayer=0;
+            private  ePlayerChip m_LetterType;
+            bool  m_IsPlayerWon;
             int m_NumOfPlayer;
 
             public Player(int i_PlayerType, char i_ChipOfPlayer)
