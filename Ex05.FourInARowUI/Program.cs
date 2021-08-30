@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
+﻿using System.Windows.Forms;
 
 namespace Ex05.FourInARowUI
 {
@@ -12,9 +7,7 @@ namespace Ex05.FourInARowUI
         public static void Main()
         {
             Application.EnableVisualStyles();
-            //FormGameSettings fourInARowSettings = new FormGameSettings();
             FourInARowGameForm fourInARowGame = new FourInARowGameForm();
-            
         }
     }
 }

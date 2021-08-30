@@ -1,5 +1,4 @@
-﻿
-namespace Ex05.FourInARowUI
+﻿namespace Ex05.FourInARowUI
 {
     partial class FormGameSettings
     {
@@ -14,10 +13,11 @@ namespace Ex05.FourInARowUI
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if(disposing && (components != null))
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -101,46 +101,22 @@ namespace Ex05.FourInARowUI
             // numericUpDownRows
             // 
             this.numericUpDownRows.Location = new System.Drawing.Point(116, 203);
-            this.numericUpDownRows.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDownRows.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.numericUpDownRows.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            this.numericUpDownRows.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
             this.numericUpDownRows.Name = "numericUpDownRows";
             this.numericUpDownRows.Size = new System.Drawing.Size(50, 26);
             this.numericUpDownRows.TabIndex = 6;
-            this.numericUpDownRows.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.numericUpDownRows.Value = new decimal(new int[] { 4, 0, 0, 0 });
             // 
             // numericUpDownCols
             // 
             this.numericUpDownCols.Location = new System.Drawing.Point(269, 203);
-            this.numericUpDownCols.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDownCols.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.numericUpDownCols.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            this.numericUpDownCols.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
             this.numericUpDownCols.Name = "numericUpDownCols";
             this.numericUpDownCols.Size = new System.Drawing.Size(50, 26);
             this.numericUpDownCols.TabIndex = 7;
-            this.numericUpDownCols.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.numericUpDownCols.Value = new decimal(new int[] { 4, 0, 0, 0 });
             // 
             // labelCols
             // 
@@ -204,7 +180,6 @@ namespace Ex05.FourInARowUI
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCols)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

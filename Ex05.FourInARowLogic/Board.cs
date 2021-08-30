@@ -1,137 +1,123 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Ex05.FourInARowLogic
+﻿namespace Ex05.FourInARowLogic
 {
-    
-        public class Board
+    public class Board
+    {
+        private readonly char[,] r_GameBoard;
+        private readonly int r_BoardLength;
+        private readonly int r_BoardWidth;
+        private readonly int r_SequenceOfFour = 4;
+
+        public Board(int i_BoardWidth, int i_BoardLength)
         {
-            private readonly char[,] r_GameBoard;
-            private int m_BoardLength;
-            private int m_BoardWidth;
-            private readonly int r_SequenceOfFour = 4;
+            r_BoardLength = i_BoardLength;
+            r_BoardWidth = i_BoardWidth;
+            r_GameBoard = new char[r_BoardLength, r_BoardWidth];
+            InitBoard(i_BoardLength, i_BoardWidth);
+        }
 
-            public Board(int i_BoardWidth,int i_BoardLength)
+        public int BoardWidth
+        {
+            get
             {
-                m_BoardLength = i_BoardLength;
-                m_BoardWidth = i_BoardWidth;
-                r_GameBoard = new char[m_BoardLength, m_BoardWidth];
-                InitBoard(i_BoardLength, i_BoardWidth);
+                return r_BoardWidth;
             }
+        }
 
-            public int BoardWidth
+        public char[,] TheGameBoard
+        {
+            get
             {
-                get
-                {
-                    return m_BoardWidth;
-                }
-
-                set
-                {
-                    m_BoardWidth = value;
-                }
+                return r_GameBoard;
             }
+        }
 
-            public char[,] TheGameBoard
+        public int BoardLength
+        {
+            get
             {
-                get
-                {
-                    return r_GameBoard;
-                }
+                return r_BoardLength;
             }
+        }
 
-            public int BoardLength
+        public void InitBoard(int i_BoardLength, int i_BoardWidth)
+        {
+            for(int i = 0; i < i_BoardLength; i++)
             {
-                get
+                for(int j = 0; j < i_BoardWidth; j++)
                 {
-                    return m_BoardLength;
-                }
-
-                set
-                {
-                    m_BoardLength = value;
+                    r_GameBoard[i, j] = ' ';
                 }
             }
+        }
 
-            public void InitBoard(int i_BoardLength, int i_BoardWidth)
+        public bool AddChips(int i_ColumnChipToAdd, char i_PlayerChip, ref int o_CurrentChipRow)
+        {
+            bool isFullColumnNumber = IsFullColumn(i_ColumnChipToAdd - 1);
+
+            if(!isFullColumnNumber)
             {
-                for (int i = 0; i < i_BoardLength; i++)
+                for(int i = r_BoardLength - 1; i >= 0; i--)
                 {
-                    for (int j = 0; j < i_BoardWidth; j++)
+                    if(isEmptyPanel(i, i_ColumnChipToAdd - 1))
                     {
-                        r_GameBoard[i, j] = ' ';
+                        r_GameBoard[i, i_ColumnChipToAdd - 1] = i_PlayerChip;
+                        o_CurrentChipRow = i;
+                        break;
                     }
                 }
             }
 
-            public bool AddChips(int i_ColumnChipToAdd, char i_PlayerChip, ref int o_CurrentChipRow)
-            {
-                bool isFullColumnNumber = IsFullColumn(i_ColumnChipToAdd - 1);
+            return isFullColumnNumber;
+        }
 
-                if (!isFullColumnNumber)
-                {
-                    for (int i = m_BoardLength - 1; i >= 0; i--)
-                    {
-                        if (isEmptyPanel(i, i_ColumnChipToAdd - 1))
-                        {
-                            r_GameBoard[i, i_ColumnChipToAdd - 1] = i_PlayerChip;
-                            o_CurrentChipRow = i;
-                            break;
-                        }
-                    }
-                }
+        private bool isEmptyPanel(int i_Row, int i_Col)
+        {
+            bool isEmptyPanel = r_GameBoard[i_Row, i_Col] == ' ';
 
-                return isFullColumnNumber;
-            }
+            return isEmptyPanel;
+        }
 
-            private bool isEmptyPanel(int i_Row, int i_Col)
-            {
-                bool isEmptyPanel = r_GameBoard[i_Row, i_Col] == ' ';
+        public bool IsFullColumn(int i_ColumnChipToAdd)
+        {
+            bool isFullColumn = !(isEmptyPanel(0, i_ColumnChipToAdd));
 
-                return isEmptyPanel;
-            }
-
-            public bool IsFullColumn(int i_ColumnChipToAdd)
-            {
-                bool isFullColumn = !(isEmptyPanel(0, i_ColumnChipToAdd));
-
-                return isFullColumn;
-            }
+            return isFullColumn;
+        }
 
         public bool IsFourInARow(char i_PlayerChip, int i_ChipRowLocation, int i_ChipColLocation)
         {
             int count = 1;
             bool isFourInARow = false;
 
-            for (int i = i_ChipColLocation; i > 0; i--)
+            for(int i = i_ChipColLocation; i > 0; i--)
             {
-                if ((r_GameBoard[i_ChipRowLocation, i] != r_GameBoard[i_ChipRowLocation, i - 1]) || (count == r_SequenceOfFour))
+                if((r_GameBoard[i_ChipRowLocation, i] != r_GameBoard[i_ChipRowLocation, i - 1])
+                   || (count == r_SequenceOfFour))
                 {
                     break;
                 }
 
-                if (r_GameBoard[i_ChipRowLocation, i] == i_PlayerChip)
+                if(r_GameBoard[i_ChipRowLocation, i] == i_PlayerChip)
                 {
                     count++;
                 }
             }
 
-            for (int i = i_ChipColLocation; i < BoardWidth - 1; i++)
+            for(int i = i_ChipColLocation; i < BoardWidth - 1; i++)
             {
-                if ((r_GameBoard[i_ChipRowLocation, i] != r_GameBoard[i_ChipRowLocation, i + 1]) || (count == r_SequenceOfFour))
+                if((r_GameBoard[i_ChipRowLocation, i] != r_GameBoard[i_ChipRowLocation, i + 1])
+                   || (count == r_SequenceOfFour))
                 {
                     break;
                 }
 
-                if (r_GameBoard[i_ChipRowLocation, i] == i_PlayerChip)
+                if(r_GameBoard[i_ChipRowLocation, i] == i_PlayerChip)
                 {
                     count++;
                 }
             }
 
-            if (count >= r_SequenceOfFour)
+            if(count >= r_SequenceOfFour)
             {
                 isFourInARow = true;
             }
@@ -144,33 +130,33 @@ namespace Ex05.FourInARowLogic
             int count = 1;
             bool isFourInACol = false;
 
-            for (int i = i_ChipRowLocation; i > 0; i--)
+            for(int i = i_ChipRowLocation; i > 0; i--)
             {
-                if ((r_GameBoard[i, i_ChipColLocation] != r_GameBoard[i - 1, i_ChipColLocation]) || (count == 4))
+                if((r_GameBoard[i, i_ChipColLocation] != r_GameBoard[i - 1, i_ChipColLocation]) || (count == 4))
                 {
                     break;
                 }
 
-                if (r_GameBoard[i, i_ChipColLocation] == i_PlayerChip)
+                if(r_GameBoard[i, i_ChipColLocation] == i_PlayerChip)
                 {
                     count++;
                 }
             }
 
-            for (int i = i_ChipRowLocation; i < m_BoardLength - 1; i++)
+            for(int i = i_ChipRowLocation; i < r_BoardLength - 1; i++)
             {
-                if ((r_GameBoard[i, i_ChipColLocation] != r_GameBoard[i + 1, i_ChipColLocation]) || (count == 5))
+                if((r_GameBoard[i, i_ChipColLocation] != r_GameBoard[i + 1, i_ChipColLocation]) || (count == 5))
                 {
                     break;
                 }
 
-                if (r_GameBoard[i, i_ChipColLocation] == i_PlayerChip)
+                if(r_GameBoard[i, i_ChipColLocation] == i_PlayerChip)
                 {
                     count++;
                 }
             }
 
-            if (count >= r_SequenceOfFour)
+            if(count >= r_SequenceOfFour)
             {
                 isFourInACol = true;
             }
@@ -182,9 +168,9 @@ namespace Ex05.FourInARowLogic
         {
             bool isFullBoard = true;
 
-            for (int c = 0; c < m_BoardWidth; c++)
+            for(int c = 0; c < r_BoardWidth; c++)
             {
-                if (r_GameBoard[0, c] == ' ')
+                if(r_GameBoard[0, c] == ' ')
                 {
                     isFullBoard = false;
                     break;
@@ -201,14 +187,14 @@ namespace Ex05.FourInARowLogic
             int rowPosition = 0;
             char currentValue = ' ';
 
-            for (int r = 0; r <= m_BoardLength - r_SequenceOfFour; r++)
+            for(int r = 0; r <= r_BoardLength - r_SequenceOfFour; r++)
             {
                 rowPosition = r;
                 match = 0;
-                for (int column = 0; column < m_BoardWidth && rowPosition < m_BoardLength; column++)
+                for(int column = 0; column < r_BoardWidth && rowPosition < r_BoardLength; column++)
                 {
                     currentValue = r_GameBoard[rowPosition, column];
-                    if (currentValue == i_PlayerChip)
+                    if(currentValue == i_PlayerChip)
                     {
                         match++;
                     }
@@ -217,7 +203,7 @@ namespace Ex05.FourInARowLogic
                         match = 0;
                     }
 
-                    if (match == 4)
+                    if(match == 4)
                     {
                         isFourInADiagonal = true;
                         break;
@@ -226,7 +212,7 @@ namespace Ex05.FourInARowLogic
                     rowPosition++;
                 }
 
-                if (isFourInADiagonal)
+                if(isFourInADiagonal)
                 {
                     break;
                 }
@@ -242,14 +228,14 @@ namespace Ex05.FourInARowLogic
             int rowPosition = 0;
             char currentValue = ' ';
 
-            for (int r = m_BoardLength - 1; r >= m_BoardLength - r_SequenceOfFour; r--)
+            for(int r = r_BoardLength - 1; r >= r_BoardLength - r_SequenceOfFour; r--)
             {
                 rowPosition = r;
                 match = 0;
-                for (int column = 0; column < m_BoardWidth && rowPosition < m_BoardLength && rowPosition >= 0; column++)
+                for(int column = 0; column < r_BoardWidth && rowPosition < r_BoardLength && rowPosition >= 0; column++)
                 {
                     currentValue = r_GameBoard[rowPosition, column];
-                    if (currentValue == i_PlayerChip)
+                    if(currentValue == i_PlayerChip)
                     {
                         match++;
                     }
@@ -257,7 +243,8 @@ namespace Ex05.FourInARowLogic
                     {
                         match = 0;
                     }
-                    if (match == r_SequenceOfFour)
+
+                    if(match == r_SequenceOfFour)
                     {
                         isFourInADiagonal = true;
                         break;
@@ -266,7 +253,7 @@ namespace Ex05.FourInARowLogic
                     rowPosition--;
                 }
 
-                if (isFourInADiagonal)
+                if(isFourInADiagonal)
                 {
                     break;
                 }
@@ -282,16 +269,16 @@ namespace Ex05.FourInARowLogic
             int columnPosition = 0;
             char currentValue = ' ';
 
-            for (int c = 1; c < m_BoardWidth; c++)
+            for(int c = 1; c < r_BoardWidth; c++)
             {
                 columnPosition = c;
                 match = 0;
-                for (int row = m_BoardLength - 1;
-                    row >= 0 && columnPosition < m_BoardWidth && columnPosition >= 1;
+                for(int row = r_BoardLength - 1;
+                    row >= 0 && columnPosition < r_BoardWidth && columnPosition >= 1;
                     row--)
                 {
                     currentValue = r_GameBoard[row, columnPosition];
-                    if (currentValue == i_PlayerChip)
+                    if(currentValue == i_PlayerChip)
                     {
                         match++;
                     }
@@ -299,7 +286,8 @@ namespace Ex05.FourInARowLogic
                     {
                         match = 0;
                     }
-                    if (match == r_SequenceOfFour)
+
+                    if(match == r_SequenceOfFour)
                     {
                         isFourInADiagonal = true;
                         break;
@@ -308,7 +296,7 @@ namespace Ex05.FourInARowLogic
                     columnPosition++;
                 }
 
-                if (isFourInADiagonal)
+                if(isFourInADiagonal)
                 {
                     break;
                 }
@@ -324,14 +312,14 @@ namespace Ex05.FourInARowLogic
             int columnPosition = 0;
             char currentValue = ' ';
 
-            for (int c = 1; c <= m_BoardWidth - 4; c++)
+            for(int c = 1; c <= r_BoardWidth - 4; c++)
             {
                 columnPosition = c;
                 match = 0;
-                for (int row = 0; row < m_BoardLength && columnPosition < m_BoardWidth; row++)
+                for(int row = 0; row < r_BoardLength && columnPosition < r_BoardWidth; row++)
                 {
                     currentValue = r_GameBoard[row, columnPosition];
-                    if (currentValue == i_PlayerChip)
+                    if(currentValue == i_PlayerChip)
                     {
                         match++;
                     }
@@ -340,7 +328,7 @@ namespace Ex05.FourInARowLogic
                         match = 0;
                     }
 
-                    if (match == r_SequenceOfFour)
+                    if(match == r_SequenceOfFour)
                     {
                         isFourInADiagonal = true;
                         break;
@@ -349,7 +337,7 @@ namespace Ex05.FourInARowLogic
                     columnPosition++;
                 }
 
-                if (isFourInADiagonal)
+                if(isFourInADiagonal)
                 {
                     break;
                 }

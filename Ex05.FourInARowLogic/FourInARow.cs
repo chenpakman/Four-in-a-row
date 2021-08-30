@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 
 namespace Ex05.FourInARowLogic
 {
@@ -13,7 +9,6 @@ namespace Ex05.FourInARowLogic
         private int m_GameRoundCounter;
         private readonly Board r_TheGameBoard;
         private bool m_IsGameOver;
-        private bool m_IsContinueToAnotherRound;
 
         public FourInARow(int i_BoardWidth, int i_BoardLength, int i_PlayerType)
         {
@@ -45,18 +40,6 @@ namespace Ex05.FourInARowLogic
             }
         }
 
-        public bool IsContinueToAnotherRound
-        {
-            get
-            {
-                return m_IsContinueToAnotherRound;
-            }
-
-            set
-            {
-                m_IsContinueToAnotherRound = value;
-            }
-        }
         public Player GetPlayer1
         {
             get
@@ -64,6 +47,7 @@ namespace Ex05.FourInARowLogic
                 return r_Player1;
             }
         }
+
         public Player GetPlayer2
         {
             get
@@ -72,17 +56,13 @@ namespace Ex05.FourInARowLogic
             }
         }
 
-
         public void InitGame()
         {
             IsGameOver = false;
-            m_IsContinueToAnotherRound = true;
             m_GameRoundCounter = 0;
             r_TheGameBoard.InitBoard(r_TheGameBoard.BoardLength, r_TheGameBoard.BoardWidth);
             r_Player1.IsPlayerWon = false;
             r_Player2.IsPlayerWon = false;
-
-
         }
 
         public Player GetCurrentPlayer()
@@ -94,8 +74,6 @@ namespace Ex05.FourInARowLogic
         {
             return m_GameRoundCounter % 2 != 0 ? r_Player1 : r_Player2;
         }
-
-        
 
         public int m_GameRound
         {
@@ -112,50 +90,34 @@ namespace Ex05.FourInARowLogic
 
         public void IsPlayerWon(int i_CurrentChipRow, int i_PlayerColumnChoice)
         {
-            bool isPlayerWon = 
-                                   r_TheGameBoard.IsFourInARow(
-                                       (char)GetCurrentPlayer().PlayerLetterType,
-                                       i_CurrentChipRow,
-                                       i_PlayerColumnChoice - 1)
-                                   || r_TheGameBoard.IsFourInADiagonal((char)GetCurrentPlayer().PlayerLetterType)
-                                   || r_TheGameBoard.IsFourInACol(
-                                       (char)GetCurrentPlayer().PlayerLetterType,
-                                       i_CurrentChipRow,
-                                       i_PlayerColumnChoice - 1); ;
+            bool isPlayerWon =
+                r_TheGameBoard.IsFourInARow(
+                    (char)GetCurrentPlayer().PlayerLetterType,
+                    i_CurrentChipRow,
+                    i_PlayerColumnChoice - 1)
+                || r_TheGameBoard.IsFourInADiagonal((char)GetCurrentPlayer().PlayerLetterType)
+                || r_TheGameBoard.IsFourInACol(
+                    (char)GetCurrentPlayer().PlayerLetterType,
+                    i_CurrentChipRow,
+                    i_PlayerColumnChoice - 1);
 
             GetCurrentPlayer().IsPlayerWon = isPlayerWon;
         }
 
-        public void UpdateBoardAndMoveToNextTurn(int i_ColumnChipToAdd, ref int o_CurrentChipRow, ref bool io_IsFullColumnNumber,char i_PlayerLetterType)
+        public void UpdateNewChipInBoard(
+            int i_ColumnChipToAdd,
+            ref int o_CurrentChipRow,
+            ref bool o_IsFullColumnNumber,
+            char i_PlayerLetterType)
         {
-           
-            io_IsFullColumnNumber = TheGameBoard.AddChips(
-                i_ColumnChipToAdd,
-                i_PlayerLetterType,
-                ref o_CurrentChipRow);
-            
-
+            o_IsFullColumnNumber = TheGameBoard.AddChips(i_ColumnChipToAdd, i_PlayerLetterType, ref o_CurrentChipRow);
         }
+
         public int GetComputerChoice()
         {
-            int computerChoice = new Random().Next(1, r_TheGameBoard.BoardWidth+1);
-
-            //Thread.Sleep(500);
+            int computerChoice = new Random().Next(1, r_TheGameBoard.BoardWidth + 1);
 
             return computerChoice;
-        }
-
-        public bool IsPlayerChoiceColumnInRange(string i_PlayerChoice, ref int io_PlayerColumnChoice)
-        {
-            bool isValidPlayerChoiceColumn = false;
-
-            if(i_PlayerChoice != string.Empty)
-            {
-                io_PlayerColumnChoice = int.Parse(i_PlayerChoice);
-                isValidPlayerChoiceColumn = io_PlayerColumnChoice <= r_TheGameBoard.BoardWidth;
-            }
-
-            return isValidPlayerChoiceColumn;
         }
     }
 }

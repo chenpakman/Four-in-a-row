@@ -44,7 +44,6 @@
     <Compile Include="FormGameSettings.Designer.cs">
       <DependentUpon>FormGameSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameManagerUI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
