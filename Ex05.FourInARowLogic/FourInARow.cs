@@ -139,7 +139,7 @@ namespace Ex05.FourInARowLogic
         }
         public int GetComputerChoice()
         {
-            int computerChoice = new Random().Next(1, r_TheGameBoard.BoardWidth);
+            int computerChoice = new Random().Next(1, r_TheGameBoard.BoardWidth+1);
 
             //Thread.Sleep(500);
 
