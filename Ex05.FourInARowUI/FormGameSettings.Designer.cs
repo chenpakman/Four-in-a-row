@@ -48,7 +48,7 @@
             // checkBoxPlayer2
             // 
             this.checkBoxPlayer2.AutoSize = true;
-            this.checkBoxPlayer2.Location = new System.Drawing.Point(61, 87);
+            this.checkBoxPlayer2.Location = new System.Drawing.Point(61, 89);
             this.checkBoxPlayer2.Name = "checkBoxPlayer2";
             this.checkBoxPlayer2.Size = new System.Drawing.Size(22, 21);
             this.checkBoxPlayer2.TabIndex = 0;
@@ -76,7 +76,7 @@
             // labelPlayer2
             // 
             this.labelPlayer2.AutoSize = true;
-            this.labelPlayer2.Location = new System.Drawing.Point(89, 87);
+            this.labelPlayer2.Location = new System.Drawing.Point(89, 90);
             this.labelPlayer2.Name = "labelPlayer2";
             this.labelPlayer2.Size = new System.Drawing.Size(69, 20);
             this.labelPlayer2.TabIndex = 3;
@@ -85,7 +85,7 @@
             // textBoxPlayer2
             // 
             this.textBoxPlayer2.Enabled = false;
-            this.textBoxPlayer2.Location = new System.Drawing.Point(176, 84);
+            this.textBoxPlayer2.Location = new System.Drawing.Point(176, 87);
             this.textBoxPlayer2.Name = "textBoxPlayer2";
             this.textBoxPlayer2.Size = new System.Drawing.Size(143, 26);
             this.textBoxPlayer2.TabIndex = 4;
@@ -100,23 +100,47 @@
             // 
             // numericUpDownRows
             // 
-            this.numericUpDownRows.Location = new System.Drawing.Point(116, 203);
-            this.numericUpDownRows.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
-            this.numericUpDownRows.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
+            this.numericUpDownRows.Location = new System.Drawing.Point(128, 203);
+            this.numericUpDownRows.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDownRows.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
             this.numericUpDownRows.Name = "numericUpDownRows";
             this.numericUpDownRows.Size = new System.Drawing.Size(50, 26);
             this.numericUpDownRows.TabIndex = 6;
-            this.numericUpDownRows.Value = new decimal(new int[] { 4, 0, 0, 0 });
+            this.numericUpDownRows.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
             // 
             // numericUpDownCols
             // 
             this.numericUpDownCols.Location = new System.Drawing.Point(269, 203);
-            this.numericUpDownCols.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
-            this.numericUpDownCols.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
+            this.numericUpDownCols.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDownCols.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
             this.numericUpDownCols.Name = "numericUpDownCols";
             this.numericUpDownCols.Size = new System.Drawing.Size(50, 26);
             this.numericUpDownCols.TabIndex = 7;
-            this.numericUpDownCols.Value = new decimal(new int[] { 4, 0, 0, 0 });
+            this.numericUpDownCols.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
             // 
             // labelCols
             // 
@@ -147,9 +171,9 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(37, 282);
+            this.buttonStart.Location = new System.Drawing.Point(37, 274);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(282, 27);
+            this.buttonStart.Size = new System.Drawing.Size(282, 34);
             this.buttonStart.TabIndex = 11;
             this.buttonStart.Text = "Start!";
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -180,6 +204,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCols)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

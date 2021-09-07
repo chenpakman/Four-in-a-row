@@ -14,7 +14,6 @@
             O
         }
 
-
         private readonly ePlayerType r_PlayerType;
         private int m_ScoreOfPlayer;
         private readonly ePlayerChip r_LetterType;
@@ -36,7 +35,6 @@
             {
                 return r_LetterType;
             }
-
         }
 
         public bool IsPlayerWon
@@ -58,8 +56,6 @@
             {
                 return r_NumOfPlayer;
             }
-
-          
         }
 
         public int PlayerScore
@@ -81,7 +77,6 @@
             {
                 return r_PlayerType;
             }
-
         }
     }
 }

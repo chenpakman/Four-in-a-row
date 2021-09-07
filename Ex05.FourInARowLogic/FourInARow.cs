@@ -8,7 +8,6 @@ namespace Ex05.FourInARowLogic
         private readonly Player r_Player2;
         private int m_GameRoundCounter;
         private readonly Board r_TheGameBoard;
-        private bool m_IsGameOver;
 
         public FourInARow(int i_BoardWidth, int i_BoardLength, int i_PlayerType)
         {
@@ -16,7 +15,6 @@ namespace Ex05.FourInARowLogic
             r_Player1 = new Player(2, 'X');
             r_Player2 = new Player(i_PlayerType, 'O');
             m_GameRoundCounter = 0;
-            m_IsGameOver = false;
         }
 
         public Board TheGameBoard
@@ -24,19 +22,6 @@ namespace Ex05.FourInARowLogic
             get
             {
                 return r_TheGameBoard;
-            }
-        }
-
-        public bool IsGameOver
-        {
-            get
-            {
-                return m_IsGameOver;
-            }
-
-            set
-            {
-                m_IsGameOver = value;
             }
         }
 
@@ -58,7 +43,6 @@ namespace Ex05.FourInARowLogic
 
         public void InitGame()
         {
-            IsGameOver = false;
             m_GameRoundCounter = 0;
             r_TheGameBoard.InitBoard(r_TheGameBoard.BoardLength, r_TheGameBoard.BoardWidth);
             r_Player1.IsPlayerWon = false;

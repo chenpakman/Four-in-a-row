@@ -16,7 +16,7 @@ namespace Ex05.FourInARowUI
         private readonly Label r_LabelPlayer2 = new Label();
         private readonly FourInARow r_Game;
 
-        public FourInARowGameForm()
+        internal FourInARowGameForm()
         {
             r_GameSettings = new FormGameSettings();
             if(r_GameSettings.ShowDialog() == DialogResult.OK)
@@ -55,7 +55,6 @@ namespace Ex05.FourInARowUI
                     m_TheGameBoardButtons[r, c] = new Button();
                     m_TheGameBoardButtons[r, c].Size = new Size(30, 30);
                     m_TheGameBoardButtons[r, c].Location = new Point((c + 1) * 35, topButtonForEachRow);
-                    m_TheGameBoardButtons[r, c].Enabled = false;
                     this.Controls.Add(m_TheGameBoardButtons[r, c]);
                 }
 
@@ -112,7 +111,7 @@ namespace Ex05.FourInARowUI
             r_Game.GetCurrentPlayer().PlayerScore += 1;
             DialogResult dialogResult = MessageBox.Show(
                 string.Format(
-                    @"Player {1} Won:{0}Another round?",
+                    @"Player {1} Won!!{0}Another round?",
                     Environment.NewLine,
                     r_Game.GetCurrentPlayer().NumberOfPlayer),
                 @"A Win!",
@@ -201,8 +200,8 @@ namespace Ex05.FourInARowUI
                 (char)r_Game.GetCurrentPlayer().PlayerLetterType);
             m_TheGameBoardButtons[io_CurrentChipRowPerson, i_SelectedButtonNumber - 1].Text =
                 ((char)r_Game.GetCurrentPlayer().PlayerLetterType).ToString();
-            m_TheGameBoardButtons[io_CurrentChipRowPerson, i_SelectedButtonNumber - 1].Enabled = true;
             m_TheGameBoardButtons[io_CurrentChipRowPerson, i_SelectedButtonNumber - 1].Enabled = false;
+            m_TheGameBoardButtons[io_CurrentChipRowPerson, i_SelectedButtonNumber - 1].Enabled = true;
             if(r_Game.TheGameBoard.IsFullColumn(i_SelectedButtonNumber - 1))
             {
                 r_ChipLocationButtons[i_SelectedButtonNumber - 1].Enabled = false;
@@ -233,8 +232,6 @@ namespace Ex05.FourInARowUI
             Thread.Sleep(500);
             m_TheGameBoardButtons[currentChipRowComputer, computerChoice - 1].Text =
                 ((char)r_Game.GetPreviousPlayer().PlayerLetterType).ToString();
-            m_TheGameBoardButtons[currentChipRowComputer, computerChoice - 1].Enabled = true;
-            m_TheGameBoardButtons[currentChipRowComputer, computerChoice - 1].Enabled = false;
             r_Game.m_GameRound++;
             if(!isGameOver(currentChipRowComputer, computerChoice))
             {
